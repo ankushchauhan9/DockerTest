@@ -25,19 +25,19 @@ pipeline{
 
         stage('Docker build'){
             steps{
-                sh 'docker build -t 111docker222/jenkinspipeline:docker-image .'
+                bat 'docker build -t 111docker222/jenkinspipeline:docker-image .'
             }
         }
 
         stage('Login to Docker Hub') {
             steps{
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                bat 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
 
         stage('Docker push'){
             steps{
-                sh 'docker push 111docker222/jenkinspipeline:docker-image'
+                bat 'docker push 111docker222/jenkinspipeline:docker-image'
             }
         }
 
