@@ -29,21 +29,22 @@ pipeline{
             }
         }
 
-        stage('Login to Docker Hub') {
+        /*stage('Login to Docker Hub') {
             steps{
                 bat 'docker login --username=111docker222 --password=Welcome@123'
             }
-        }
+        }*/
 
         stage('Docker push'){
-            steps{
+            withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USR')]) {
                 bat 'docker push 111docker222/jenkinspipeline:latest'
             }
+
         }
 
         stage('Docker run'){
             steps{
-                bat 'docker run --rm 111docker222/jenkinspipeline:latest'
+                bat 'docker run -p 9595:9191 -d 111docker222/jenkinspipeline:latest'
             }
         }
 
