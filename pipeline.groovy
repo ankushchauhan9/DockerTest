@@ -19,6 +19,18 @@ pipeline{
             }
         }
 
+        stage('Docker build'){
+            steps{
+                sh 'docker build -f Dockerfile -t dock-spring .'
+            }
+        }
+
+        stage('Publish docker image'){
+            steps{
+                sh 'docker run -p 9393:9191 dock-spring'
+            }
+        }
+
     }
 
     post{
