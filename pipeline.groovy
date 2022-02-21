@@ -2,6 +2,10 @@ pipeline{
 
     agent any
 
+    environment{
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    }
+
     triggers {
         pollSCM('* * * * *')
     }
@@ -21,13 +25,19 @@ pipeline{
 
         stage('Docker build'){
             steps{
-                sh 'docker build -f Dockerfile -t dock-spring .'
+                sh 'docker build -t 111docker222/jenkinspipeline:docker-image .'
             }
         }
 
-        stage('Publish docker image'){
+        stage('Login to Docker Hub') {
             steps{
-                sh 'docker run -p 9393:9191 dock-spring'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+
+        stage('Docker push'){
+            steps{
+                sh 'docker push 111docker222/jenkinspipeline:docker-image'
             }
         }
 
