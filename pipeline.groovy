@@ -36,8 +36,10 @@ pipeline{
         }*/
 
         stage('Docker push'){
-            withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USR')]) {
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKER_PWD', usernameVariable: 'DOCKER_USR')]) {
                 bat 'docker push 111docker222/jenkinspipeline:latest'
+                }
             }
 
         }
