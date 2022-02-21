@@ -23,7 +23,7 @@ pipeline{
 
     post{
         always{
-            archiveArtifacts artifacts: '/build/libs/TestingDocker-0.0.1-SNAPSHOT.jar'
+            archiveArtifacts artifacts: 'build/libs/TestingDocker-0.0.1-SNAPSHOT.jar'
         }
     }
 
