@@ -41,6 +41,12 @@ pipeline{
             }
         }
 
+        stage('Docker run'){
+            steps{
+                bat 'docker run --rm 111docker222/jenkinspipeline:latest'
+            }
+        }
+
     }
 
     post{
