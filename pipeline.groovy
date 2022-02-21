@@ -31,7 +31,7 @@ pipeline{
 
         stage('Login to Docker Hub') {
             steps{
-                sh 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                bat 'docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
 
